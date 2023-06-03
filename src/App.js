@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <AppProvider>
-        <Page />
+          <Page />
       </AppProvider>
     </>
   );
