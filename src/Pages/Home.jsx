@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../Css/Home.css";
 import SingleCard from "../Components/SingleCard";
+import Timer from "../Components/Timer";
 
 // Mỗi màn sẽ có số card khác nhau
 const cardsImage = [
@@ -76,7 +77,7 @@ const Home = () => {
 
   return (
     <div className="container">
-      <h1>Memory Game</h1>
+      <h1>Memory Game {<Timer/>}</h1>
       <button onClick={shuffleCards}>New Game</button>
       <div className="card-gird">
         {cards.map((card, index) => (
