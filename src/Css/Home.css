@@ -1,12 +1,19 @@
 .container {
     max-width: 1024px;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    position: relative;
 }
 
 .card-gird{
-    margin-top: 40px;
+    margin: 40px auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 20px;
+    width: 600px;
+    height: 450px;
 }
 

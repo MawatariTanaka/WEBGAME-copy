@@ -1,28 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-const Timer = () => {
+const Timer = (probs) => {
+  const { status, GameOver } = probs;
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
-
-  const timeCount = Date.now() + 5*60*1000;
+  const timeCurrent = useRef(0);
+  const timeInterval = useRef(null);
 
   // thoi gian hien tai
-  const getTime = () => {
-    const time = timeCount - Date.now();
-    setMinutes(Math.floor((time / 1000 / 60) % 60));
-    setSeconds(Math.floor((time / 1000) % 60));
+  const getTime = (timeCount) => {
+    timeCurrent.current = timeCount - Date.now();
+    console.log("getTime: ", timeCurrent.current , timeInterval.current);
+    if (timeCurrent.current >= 0) {
+      setMinutes(Math.floor((timeCurrent.current / 1000 / 60) % 60));
+      setSeconds(Math.floor((timeCurrent.current / 1000) % 60));
+    }else{
+      clearInterval(timeInterval.current);
+      GameOver(true);
+    }
   };
 
-  // dem nguoc
   useEffect(() => {
-    getTime(timeCount)
-    const interval = setInterval(() => getTime(timeCount), 1000);
-    return () => clearInterval(interval);
-  }, []);
+    let time = Date.now() + 5 * 1000 +50;
+    if (status.status === "play") {
+      getTime(time);
+      timeInterval.current = setInterval(() => getTime(time), 1000);
+    }
 
-  return <div>
-    Time: {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
-  </div>;
+    if (status.status === "stop") {
+      getTime(time);
+    }
+
+    if (status.status === "resume") {
+      time = Date.now() + timeCurrent.current;
+      timeInterval.current = setInterval(() => getTime(time), 1000);
+    }
+
+    return () => {
+      clearInterval(timeInterval.current);
+    };
+  }, [status]);
+
+  return (
+    <div>
+      Time: {String(minutes).padStart(2, "0")}:
+      {String(seconds).padStart(2, "0")}
+    </div>
+  );
 };
 
 export default Timer;

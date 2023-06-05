@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../Css/Home.css";
 import SingleCard from "../Components/SingleCard";
 import Timer from "../Components/Timer";
+import Dialog from "../Components/Dialog";
+import { AppContext } from "../Contexts/AppContext";
 
 // Mỗi màn sẽ có số card khác nhau
 const cardsImage = [
@@ -19,6 +21,8 @@ const Home = () => {
   const [choice1, setChoice1] = useState(null);
   const [choice2, setChoice2] = useState(null);
   const [choicing, setChoicing] = useState(false);
+  const [statusGame, setStatusGame] = useState({status: ''});
+  const {setShowDialog} = useContext(AppContext);
 
   //shuffle cards
   const shuffleCards = () => {
@@ -30,6 +34,8 @@ const Home = () => {
     setChoice2(null);
     setCards(shuffledCards);
     setTurns(0);
+    setStatusGame({status: 'play'});
+    console.log(statusGame);
   };
 
   const handleSelected = (card) => {
@@ -67,18 +73,25 @@ const Home = () => {
     setChoicing(false);
   };
 
-  // auto play game
-  useEffect(() => {
-    shuffleCards();
-    return () => {
-      console.log("Thoat");
-    }
-  }, []);
+  const handlePauseGame = () => {
+    setStatusGame({status: 'pause'});
+    setShowDialog(true);
+  };
+
+  const handleResumeGame = () => {
+    setStatusGame({status: 'resume'})
+  };
+
+  const handleGameOver = (resut) => {
+    setShowDialog(resut);
+  };
 
   return (
     <div className="container">
-      <h1>Memory Game {<Timer/>}</h1>
-      <button onClick={shuffleCards}>New Game</button>
+      <h1>Memory Game {<Timer status={statusGame} GameOver={handleGameOver}/>}</h1>
+      <button onClick={shuffleCards}>Play Game</button>
+      <button onClick={handlePauseGame}>Pause Game</button>
+      <button onClick={handleResumeGame}>Resume Game</button>
       <div className="card-gird">
         {cards.map((card, index) => (
           <SingleCard
@@ -90,6 +103,7 @@ const Home = () => {
           />
         ))}
       </div>
+      <Dialog/>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import About from "../Pages/About";
+import Clock from "./Clock";
 
 const Menus = [
   {
@@ -39,11 +40,14 @@ const Header = () => {
 
   return (
     <div className="nav-bar">
-      <h1>Web Game</h1>
+      <h1>
+        Web Game
+      </h1>
+      <Clock />
       <div className="nav">
         {Menus.map((e) => (
           <NavLink
-          key={e.title}
+            key={e.title}
             className={({ isActive }) =>
               isActive ? "nav-link-active" : "nav-link-main"
             }
