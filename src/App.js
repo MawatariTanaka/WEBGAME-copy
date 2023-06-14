@@ -4,11 +4,11 @@ import Page from "./Pages/Page";
 
 function App() {
   return (
-    <>
+    <div>
       <AppProvider>
           <Page />
       </AppProvider>
-    </>
+    </div>
   );
 }
 

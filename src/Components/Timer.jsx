@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { AppContext } from "../Contexts/AppContext";
 
 const Timer = (probs) => {
-  const { status, GameOver } = probs;
+  const { statusGame, setStatusGame, setShowDialog } = useContext(AppContext);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const timeCurrent = useRef(0);
@@ -16,22 +17,23 @@ const Timer = (probs) => {
       setSeconds(Math.floor((timeCurrent.current / 1000) % 60));
     }else{
       clearInterval(timeInterval.current);
-      GameOver(true);
+      setStatusGame('game_over');
+      setShowDialog(true);
     }
   };
 
   useEffect(() => {
     let time = Date.now() + 5 * 1000 +50;
-    if (status.status === "play") {
+    if (statusGame === "play") {
       getTime(time);
       timeInterval.current = setInterval(() => getTime(time), 1000);
     }
 
-    if (status.status === "stop") {
+    if (statusGame === "stop") {
       getTime(time);
     }
 
-    if (status.status === "resume") {
+    if (statusGame === "resume") {
       time = Date.now() + timeCurrent.current;
       timeInterval.current = setInterval(() => getTime(time), 1000);
     }
@@ -39,10 +41,12 @@ const Timer = (probs) => {
     return () => {
       clearInterval(timeInterval.current);
     };
-  }, [status]);
+  }, [statusGame]);
 
   return (
-    <div>
+    <div style={{
+      visibility: statusGame !== 'menu' ? 'visible' : 'hidden'
+    }}>
       Time: {String(minutes).padStart(2, "0")}:
       {String(seconds).padStart(2, "0")}
     </div>

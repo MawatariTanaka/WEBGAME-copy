@@ -48,9 +48,7 @@ const Header = () => {
         {Menus.map((e) => (
           <NavLink
             key={e.title}
-            className={({ isActive }) =>
-              isActive ? "nav-link-active" : "nav-link-main"
-            }
+            className='nav-link'
             to={e.url}
           >
             {e.title}
