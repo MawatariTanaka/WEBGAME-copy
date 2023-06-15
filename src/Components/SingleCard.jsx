@@ -1,5 +1,5 @@
 import React from "react";
-import "../Css/SingleCard.css";
+import "../scss/Css/SingleCard.css";
 
 const SingleCard = ({ card, click, flipped, choicing }) => {
   return (

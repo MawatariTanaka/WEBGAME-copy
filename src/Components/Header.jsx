@@ -1,11 +1,7 @@
 import React, { useContext } from "react";
-import { AppContext } from "../Contexts/AppContext";
+import { AppContext } from "../contexts/AppContext";
 import { NavLink, Route, Routes } from "react-router-dom";
-import "../Css/Header.css";
-import Home from "../Pages/Home";
-import Login from "../Pages/Login";
-import Register from "../Pages/Register";
-import About from "../Pages/About";
+import "../scss/Css/Header.css";
 import Clock from "./Clock";
 
 const Menus = [

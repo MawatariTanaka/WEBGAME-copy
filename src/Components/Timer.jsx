@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { AppContext } from "../Contexts/AppContext";
+import { AppContext } from "../contexts/AppContext";
 
 const Timer = (probs) => {
   const { statusGame, setStatusGame, setShowDialog } = useContext(AppContext);

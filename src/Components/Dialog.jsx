@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import "../Css/Dialog.css";
-import { AppContext } from "../Contexts/AppContext";
+import "../scss/Css/Dialog.css";
+import { AppContext } from "../contexts/AppContext";
 
 const Dialog = (probs) => {
   const { showDialog, statusGame } = useContext(AppContext);

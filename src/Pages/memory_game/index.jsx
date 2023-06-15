@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import "../Css/Home.css";
-import SingleCard from "../Components/SingleCard";
-import Timer from "../Components/Timer";
-import Dialog from "../Components/Dialog";
-import { AppContext } from "../Contexts/AppContext";
+import "../../scss/Css/Home.css";
+import SingleCard from "../../components/SingleCard";
+import Timer from "../../components/Timer";
+import Dialog from "../../components/Dialog";
+import { AppContext } from "../../contexts/AppContext";
 import { Outlet } from "react-router-dom";
 
 // Mỗi màn sẽ có số card khác nhau
@@ -16,7 +16,7 @@ const cardsImage = [
   { src: "./imgs/sword-1.png", matched: false },
 ];
 
-const Home = () => {
+const MemoryGame = () => {
   const [cards, setCards] = useState([]);
   const [turns, setTurns] = useState(0);
   const [choice1, setChoice1] = useState(null);
@@ -117,4 +117,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default MemoryGame;
