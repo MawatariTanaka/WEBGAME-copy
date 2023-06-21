@@ -11,7 +11,7 @@ const Footer = () => {
     return (
         <>
             <footer className="footer">
-                <div class="attribution">
+                <div className="attribution">
                     Challenge by Dũng Mentor . Coded by Nhóm anh em
 
                 </div>

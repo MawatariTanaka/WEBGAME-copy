@@ -19,7 +19,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Game1" element={<MemoryGame />} />
-          <Route path="/Game2" element={<RockPaperScissors />} />
+          <Route path="/Game2" element={<RockPaperScissors />} >
+            
+          </Route>
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/About" element={<About />} />
