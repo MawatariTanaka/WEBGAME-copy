@@ -7,6 +7,7 @@ const Timer = (probs) => {
   const [seconds, setSeconds] = useState(0);
   const timeCurrent = useRef(0);
   const timeInterval = useRef(null);
+  const { overTime } = probs;
 
   // thoi gian hien tai
   const getTime = (timeCount) => {
@@ -19,11 +20,12 @@ const Timer = (probs) => {
       clearInterval(timeInterval.current);
       setStatusGame('game_over');
       setShowDialog(true);
+      overTime("lose");
     }
   };
 
   useEffect(() => {
-    let time = Date.now() + 120 * 1000 +50;
+    let time = Date.now() + 5 * 1000 +50;
     if (statusGame === "play") {
       getTime(time);
       timeInterval.current = setInterval(() => getTime(time), 1000);

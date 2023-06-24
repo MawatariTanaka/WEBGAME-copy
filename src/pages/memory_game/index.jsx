@@ -4,8 +4,12 @@ import SingleCard from "../../components/SingleCard";
 import Timer from "../../components/Timer";
 import Dialog from "../../components/Dialog";
 import { AppContext } from "../../contexts/AppContext";
-import { Outlet } from "react-router-dom";
 import { Button } from "antd";
+import sound_bg from '../../sound/bgMemory.mp3';
+import sound_click from '../../sound/flip_sound.mp3';
+import sound_win from '../../sound/win.mp3';
+import sound_lose from '../../sound/lose.mp3';
+import useSound from 'use-sound';
 
 // Mỗi màn sẽ có số card khác nhau
 const cardsImage = [
@@ -23,7 +27,17 @@ const MemoryGame = () => {
   const [choice1, setChoice1] = useState(null);
   const [choice2, setChoice2] = useState(null);
   const [choicing, setChoicing] = useState(false);
-  const {setShowDialog, setStatusGame, statusGame} = useContext(AppContext);
+  const { setShowDialog, setStatusGame, statusGame, setIsPlaying } = useContext(AppContext);
+
+  const [play, { stop, pause }] = useSound(sound_bg, {
+    loop: true,
+    onplay: () => {setIsPlaying(true)},
+    onend: () => {setIsPlaying(false)}
+  });
+
+  const [play_click] = useSound(sound_click);
+  const [play_win] = useSound(sound_win);
+  const [play_lose] = useSound(sound_lose);
 
   //shuffle cards
   const shuffleCards = () => {
@@ -37,10 +51,12 @@ const MemoryGame = () => {
     setTurns(0);
     setStatusGame('play');
     setShowDialog(false);
-    console.log(statusGame);
+
+    play();
   };
 
   const handleSelected = (card) => {
+    play_click();
     choice1 ? setChoice2(card) : setChoice1(card);
   };
 
@@ -61,6 +77,8 @@ const MemoryGame = () => {
         resetChoice();
         setStatusGame('win')
         setShowDialog(true);
+        stop();
+        play_win();
       } else {
         setTimeout(() => {
           resetChoice();
@@ -80,27 +98,29 @@ const MemoryGame = () => {
   const handlePauseGame = () => {
     setStatusGame('pause');
     setShowDialog(true);
+    pause();
   };
 
   const handleResumeGame = () => {
     setStatusGame('resume');
     setShowDialog(false);
+    play();
   };
 
-  const handleGameOver = (resut) => {
-    setShowDialog(resut);
-    setShowDialog(false);
+  const handleGameOver = () => {
+    stop();
+    play_lose();
   };
 
   // Bật menu
   useEffect(() => {
     setStatusGame('menu');
     setShowDialog(true);
-  },[]);
+  }, []);
 
   return (
     <div className="container">
-      <h1>Memory Game <Timer/></h1>
+      <h1>Memory Game <Timer overTime={handleGameOver}/></h1>
       <Button onClick={() => handlePauseGame()}>Pause Game</Button>
       <div className="card-gird">
         {cards.map((card, index) => (
@@ -113,7 +133,7 @@ const MemoryGame = () => {
           />
         ))}
       </div>
-      <Dialog shuffleCards={shuffleCards} handlePauseGame={handlePauseGame} handleResumeGame={handleResumeGame}/>
+      <Dialog shuffleCards={shuffleCards} handlePauseGame={handlePauseGame} handleResumeGame={handleResumeGame} />
     </div>
   );
 };

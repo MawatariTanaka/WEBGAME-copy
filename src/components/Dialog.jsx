@@ -72,7 +72,11 @@ const DialogSetting = (probs) => {
   const { setStatusGame } = useContext(AppContext);
   return (
     <div className="dialog-menu">
-      Setting
+      <h1 style={{
+        position: 'absolute',
+        top: '10px',
+
+      }}> Setting </h1>
       <Button
         onClick={() => {
           setStatusGame("menu");
@@ -115,7 +119,11 @@ const DialogWin = (probs) => {
   const { setStatusGame } = useContext(AppContext);
   return (
     <div className="dialog-menu">
-      Chiến thắng
+            <h1 style={{
+        position: 'absolute',
+        top: '10px',
+
+      }}>Chiến thắng</h1>
       <div>
         <Button
           onClick={() => {
