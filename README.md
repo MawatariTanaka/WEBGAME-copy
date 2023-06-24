@@ -9,6 +9,7 @@
 - Modal thông báo kết quả
 - Game 2: Rock Paper Scissors
 - Page Home: Hiển thị all game -> điều hướng đến game được chọn
+- Sound: Game 1 
 #### TODO
 - Game 1: UI
 - Game 2: Online
