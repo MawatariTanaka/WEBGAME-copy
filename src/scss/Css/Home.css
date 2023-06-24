@@ -7,14 +7,16 @@
     gap: 20px;
     align-items: center;
     position: relative;
+    color: black;
 }
 
 .card-gird{
-    margin: 40px auto;
+    margin: auto auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 20px;
-    width: 600px;
-    height: 450px;
+    width: 90%;
+    height: 80%;
+    padding: 40px 40px;
 }
 

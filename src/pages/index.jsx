@@ -12,27 +12,27 @@ const Home = () => {
   return (
     <Row >
       <Col>
-      <Card
-        hoverable
-        style={{ height: 311, width: 240, marginTop: 30, marginLeft: 20 }}
-        cover={<img alt="Game 1" src={preview} />}
-        onClick={() => { navigate('/Game1') }}
-      >
-        Memory Game
-      </Card>
+        <Card
+          hoverable
+          style={{ height: 311, width: 240, marginTop: 30, marginLeft: 20}}
+          cover={<img alt="Game 1" src={preview} />}
+          onClick={() => { navigate('/Game1') }}
+        >
+          Memory Game
+        </Card>
       </Col>
-      
+
       <Col >
-      <Card
-        hoverable
-        style={{ height: 311, width: 240, marginTop: 30, marginLeft: 20 }}
-        cover={<div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: 240}}> <img style={{width: 200, height: 200}} alt="Game 2" src={preview1} /> </div>}
-        onClick={() => { navigate('/Game2') }}
-      >
-        Rock Paper Scissors Game
-      </Card>
+        <Card
+          hoverable
+          style={{ height: 311, width: 240, marginTop: 30, marginLeft: 20 }}
+          cover={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 240 }}> <img style={{ width: 200, height: 200 }} alt="Game 2" src={preview1} /> </div>}
+          onClick={() => { navigate('/Game2') }}
+        >
+          Rock Paper Scissors Game
+        </Card>
       </Col>
-     
+
     </Row>
   );
 };

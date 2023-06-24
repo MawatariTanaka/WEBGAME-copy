@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { AppContext } from "../contexts/AppContext";
-import { NavLink, Route, Routes } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "../scss/Css/Header.css";
-import Clock from "./Clock";
+import { Button } from "antd";
 
 const Menus = [
   {
@@ -36,10 +36,12 @@ const Header = () => {
 
   return (
     <div className="nav-bar">
-      <h1>
-        Web Game
-      </h1>
-      <Clock />
+      <div className="nav">
+        <h1>
+          Web Game
+        </h1>
+      </div>
+
       <div className="nav">
         {Menus.map((e) => (
           <NavLink
@@ -50,15 +52,15 @@ const Header = () => {
             {e.title}
           </NavLink>
         ))}
-
-        <button
-          onClick={() => {
-            setMode(!mode);
-          }}
-        >
-          Switch Mode
-        </button>
       </div>
+      <Button
+        style={{ backgroundColor: 'yellow'}}
+        onClick={() => {
+          setMode(!mode);
+        }}
+      >
+        Contact Us
+      </Button>
     </div>
   );
 };

@@ -24,7 +24,7 @@ const Clock = () => {
         clearInterval(timeInterval);
     };
   }, []);
-  return <div>Clock: {timeString}</div>;
+  return <div className="attribution" style={{left: 100}}>Thời gian hiện tại: {timeString}</div>;
 };
 
 export default Clock;

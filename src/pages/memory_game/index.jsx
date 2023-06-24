@@ -5,6 +5,7 @@ import Timer from "../../components/Timer";
 import Dialog from "../../components/Dialog";
 import { AppContext } from "../../contexts/AppContext";
 import { Outlet } from "react-router-dom";
+import { Button } from "antd";
 
 // Mỗi màn sẽ có số card khác nhau
 const cardsImage = [
@@ -83,6 +84,7 @@ const MemoryGame = () => {
 
   const handleResumeGame = () => {
     setStatusGame('resume');
+    setShowDialog(false);
   };
 
   const handleGameOver = (resut) => {
@@ -99,7 +101,7 @@ const MemoryGame = () => {
   return (
     <div className="container">
       <h1>Memory Game <Timer/></h1>
-      <button onClick={() => handlePauseGame()}>Pause Game</button>
+      <Button onClick={() => handlePauseGame()}>Pause Game</Button>
       <div className="card-gird">
         {cards.map((card, index) => (
           <SingleCard
@@ -112,7 +114,6 @@ const MemoryGame = () => {
         ))}
       </div>
       <Dialog shuffleCards={shuffleCards} handlePauseGame={handlePauseGame} handleResumeGame={handleResumeGame}/>
-      <Outlet />
     </div>
   );
 };

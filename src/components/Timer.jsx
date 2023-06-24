@@ -11,7 +11,7 @@ const Timer = (probs) => {
   // thoi gian hien tai
   const getTime = (timeCount) => {
     timeCurrent.current = timeCount - Date.now();
-    console.log("getTime: ", timeCurrent.current , timeInterval.current);
+    // console.log("getTime: ", timeCurrent.current , timeInterval.current);
     if (timeCurrent.current >= 0) {
       setMinutes(Math.floor((timeCurrent.current / 1000 / 60) % 60));
       setSeconds(Math.floor((timeCurrent.current / 1000) % 60));
@@ -23,7 +23,7 @@ const Timer = (probs) => {
   };
 
   useEffect(() => {
-    let time = Date.now() + 5 * 1000 +50;
+    let time = Date.now() + 120 * 1000 +50;
     if (statusGame === "play") {
       getTime(time);
       timeInterval.current = setInterval(() => getTime(time), 1000);
