@@ -1,28 +1,28 @@
-import React, { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../App';
-import { ChatContext } from '../contexts/chatContext';
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../App";
+import { ChatContext } from "../Context/chatContext";
 
-export default function Login() {
+export default function SignIn() {
     const { dispatch } = useContext(ChatContext);
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
 
     const handleSignIn = async (e) => {
         e.preventDefault();
         try {
             await signInWithEmailAndPassword(auth, email, password).then(() => {
-                dispatch({ type: 'RESET' });
-                navigate('/');
+                dispatch({ type: "RESET" });
+                navigate("/");
             });
         } catch (error) {
-            if (error.code === 'auth/wrong-password') {
-                setError('Incorrect password.');
-            } else if (error.code === 'auth/user-not-found') {
-                setError('The email is not found.');
+            if (error.code === "auth/wrong-password") {
+                setError("Incorrect password.");
+            } else if (error.code === "auth/user-not-found") {
+                setError("The email is not found.");
             } else {
                 setError(error.message);
             }
@@ -31,7 +31,7 @@ export default function Login() {
 
     return (
         <form className="auth-form" onSubmit={handleSignIn}>
-            <h2 style={{ gridColumn: '1 / span 2' }}>Sign In</h2>
+            <h2 style={{ gridColumn: "1 / span 2" }}>Sign In</h2>
             <label className="auth-label" htmlFor="email">
                 Email:
             </label>
@@ -55,7 +55,7 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
             />
             {error && (
-                <div style={{ color: 'pink', gridColumn: '1 / span 2' }}>
+                <div style={{ color: "pink", gridColumn: "1 / span 2" }}>
                     {error}
                 </div>
             )}
