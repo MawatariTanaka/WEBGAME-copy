@@ -8,7 +8,7 @@ import {
     where,
 } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
-import { auth, db } from "../App";
+import { auth, db } from "../../../../App";
 import {
     Avatar,
     Layout,

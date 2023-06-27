@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../App';
-import { ChatContext } from '../contexts/chatContext';
+import { auth } from '../../App';
+import { ChatContext } from '../../contexts/chatContext';
 
 export default function Login() {
     const { dispatch } = useContext(ChatContext);

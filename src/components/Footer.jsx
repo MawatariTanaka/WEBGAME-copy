@@ -16,10 +16,10 @@ const Footer = () => {
                     Challenge by Mindx . Coded by Nhóm anh em
                 </div>
                 <Clock />
-                <AnimateDog />
-                <button className="rules" onClick={toggle}>
+                {/* <AnimateDog /> */}
+                {/* <button className="rules" onClick={toggle}>
                     Rules
-                </button>
+                </button> */}
             </footer>
             {modal ? <Modal toggle={toggle} /> : null}
         </>

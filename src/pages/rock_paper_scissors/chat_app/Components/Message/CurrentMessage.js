@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Input, Button, Layout } from "antd";
-import { auth, db } from "../../App";
+import { auth, db } from "../../../../../App";
 import { doc, arrayUnion, updateDoc, onSnapshot } from "firebase/firestore";
-import { ChatContext } from "../../Context/chatContext";
+import { ChatContext } from "../../../../../contexts/chatContext";
 import CustomHeader from "./CustomHeader";
 
 const { Content, Footer } = Layout;

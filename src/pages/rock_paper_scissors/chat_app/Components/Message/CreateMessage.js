@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react';
-import { Form, Input, Select, Switch, Button } from 'antd';
-import { v4 as uuidv4 } from 'uuid';
-import { auth, db } from '../../App';
+import React, { useState, useContext } from "react";
+import { Form, Input, Select, Switch, Button } from "antd";
+import { v4 as uuidv4 } from "uuid";
+import { auth, db } from "../../../../../App";
 import {
     collection,
     query,
@@ -10,22 +10,22 @@ import {
     getDocs,
     setDoc,
     serverTimestamp,
-} from 'firebase/firestore';
-import { ChatContext } from '../../Context/chatContext';
+} from "firebase/firestore";
+import { ChatContext } from "../../../../../contexts/chatContext";
 
 const { Option } = Select;
 
 export default function CreateMessage() {
     const [form] = Form.useForm();
     const [options, setOptions] = useState([]);
-    const [roomName, setRoomName] = useState('');
-    const [otherPlayer, setOtherPlayer] = useState(['', '']);
+    const [roomName, setRoomName] = useState("");
+    const [otherPlayer, setOtherPlayer] = useState(["", ""]);
     const [privateRoom, setPrivateRoom] = useState(false);
     const { dispatch } = useContext(ChatContext);
 
     const onFinish = async () => {
         const currentBan = await getDoc(
-            doc(db, 'users', auth.currentUser.uid)
+            doc(db, "users", auth.currentUser.uid)
         ).then((doc) => {
             if (doc.exists()) {
                 const fullBan = doc.data().ban || [];
@@ -39,7 +39,7 @@ export default function CreateMessage() {
         });
 
         const otherPlayerName = await getDoc(
-            doc(db, 'users', otherPlayer)
+            doc(db, "users", otherPlayer)
         ).then((doc) => {
             if (doc.exists()) {
                 return doc.data().username;
@@ -71,16 +71,16 @@ export default function CreateMessage() {
             roomName: roomName,
         };
 
-        await setDoc(doc(db, 'rooms', roomId), roomData).then(() => {
+        await setDoc(doc(db, "rooms", roomId), roomData).then(() => {
             dispatch({
-                type: 'CHANGE_ROOM',
+                type: "CHANGE_ROOM",
                 payload: roomId,
             });
         });
     };
 
     const onSearch = async (value) => {
-        const q = query(collection(db, 'users'));
+        const q = query(collection(db, "users"));
         const querySnapshot = await getDocs(q);
         const newOptions = querySnapshot.docs.slice(0, 5).map((doc) => ({
             label: doc.data().username,

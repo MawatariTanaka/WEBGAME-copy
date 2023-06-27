@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Triangle from '../../images/rock_paper_scissors/bg-triangle.svg';
+import Triangle from '../../../images/rock_paper_scissors/bg-triangle.svg';
 
 const Play = ({ setMyChoice }) => {
     const setChoice = (e) => {

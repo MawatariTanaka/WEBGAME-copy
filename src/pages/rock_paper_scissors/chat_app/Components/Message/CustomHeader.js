@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Layout, Menu } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
-import { ChatContext } from "../../Context/chatContext";
+import { ChatContext } from "../../../../../contexts/chatContext";
 
 const { Header } = Layout;
 

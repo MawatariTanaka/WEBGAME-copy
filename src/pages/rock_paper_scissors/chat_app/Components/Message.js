@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ChatContext } from "../Context/chatContext";
+import { ChatContext } from "../../../../contexts/chatContext";
 import CurrentMessage from "./Message/CurrentMessage";
 import BlankMessage from "./Message/BlankMessage";
 import CreateMessage from "./Message/CreateMessage";

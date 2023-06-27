@@ -1,7 +1,7 @@
-import { useContext } from 'react';
-import { Button, Col, Row } from 'antd';
-import { ChatContext } from '../Context/chatContext';
-import { db } from '../App';
+import { useContext } from "react";
+import { Button, Col, Row } from "antd";
+import { ChatContext } from "../../../../contexts/chatContext";
+import { auth, db } from "../../../../App";
 import {
     arrayUnion,
     collection,
@@ -11,8 +11,8 @@ import {
     query,
     updateDoc,
     where,
-} from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+} from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 export default function GoingToBan({ goingToBan }) {
     const { dispatch } = useContext(ChatContext);
@@ -21,21 +21,21 @@ export default function GoingToBan({ goingToBan }) {
     const handleBan = async (act) => {
         if (act) {
             const userUid = auth.currentUser.uid;
-            const userRef = doc(db, 'users', userUid);
+            const userRef = doc(db, "users", userUid);
             const q = query(
-                collection(db, 'rooms'),
-                where('host_id', '==', userUid)
+                collection(db, "rooms"),
+                where("host_id", "==", userUid)
             );
             const querySnapshot = await getDocs(q);
 
             switch (goingToBan.type) {
-                case 'full':
+                case "full":
                     await updateDoc(userRef, {
                         ban: arrayUnion(goingToBan.id),
                     });
 
                     for (const docRef of querySnapshot.docs) {
-                        const roomRef = doc(db, 'rooms', docRef.id);
+                        const roomRef = doc(db, "rooms", docRef.id);
                         const roomSnapshot = await getDoc(roomRef);
                         const inChat = roomSnapshot.data().in_chat;
                         await updateDoc(roomRef, {
@@ -47,12 +47,12 @@ export default function GoingToBan({ goingToBan }) {
                     }
                     break;
 
-                case 'chat':
+                case "chat":
                     await updateDoc(userRef, {
                         ban_chat: arrayUnion(goingToBan.id),
                     });
                     for (const docRef of querySnapshot.docs) {
-                        const roomRef = doc(db, 'rooms', docRef.id);
+                        const roomRef = doc(db, "rooms", docRef.id);
                         await updateDoc(roomRef, {
                             ban_chat: arrayUnion(goingToBan.id),
                         });
@@ -62,13 +62,13 @@ export default function GoingToBan({ goingToBan }) {
                     break;
             }
         }
-        dispatch({ type: 'CHANGE_GOING_TO_BAN', payload: '' });
+        dispatch({ type: "CHANGE_GOING_TO_BAN", payload: "" });
     };
 
     return (
         <Row justify="center" align="middle" className="going-to-ban-alert">
             <Col>
-                <div style={{ textAlign: 'center', marginBottom: 20 }}>
+                <div style={{ textAlign: "center", marginBottom: 20 }}>
                     Do you want to remove {goingToBan.username} from this room
                     and all subsequent rooms?
                 </div>

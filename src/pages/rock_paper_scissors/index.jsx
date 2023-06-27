@@ -1,7 +1,8 @@
 import React, { useState, createContext, useReducer } from 'react';
-import Header from './Header';
-import Play from './Play';
-import Game from './Game';
+import Header from './game/Header';
+import Play from './game/Play';
+import Game from './game/Game';
+import Chatroom from "./chat_app/Components/Chatroom"
 
 const initialState = {};
 
@@ -29,9 +30,13 @@ const RockPaperScissors = () => {
     return (
         <GameProvider>
             <div className="container">
-                <Header score={score} />
+                <Chatroom />
+                <div className="game-container">
+
+                </div>
+                {/* <Header score={score} /> 
                 <Play setMyChoice={setMyChoice} />
-                <Game myChoice={myChoice} score={score} setScore={setScore} />
+                <Game myChoice={myChoice} score={score} setScore={setScore} /> */}
             </div>
         </GameProvider>
     );

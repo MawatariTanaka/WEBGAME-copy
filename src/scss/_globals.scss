@@ -4,19 +4,18 @@
 *,*::before,*::after{
     margin: 0;
     padding: 0;
-    box-sizing: inherit;
+    box-sizing: border-box;
 }
 
 body{
+    min-height: 100vh;
     font-family: 'Barlow Semi Condensed', sans-serif;
     color: #fff;
     background: #fff;
     text-align: center;
-    box-sizing: border-box;
 }
 
 .container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
